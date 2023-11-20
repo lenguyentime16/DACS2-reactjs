@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 import './HomeHeader.scss';
+import logo from '../../assets/images/logo4.svg';
+import { FormattedMessage } from 'react-intl';
 class HomeHeader extends Component {
 
     render() {
@@ -13,36 +15,39 @@ class HomeHeader extends Component {
                 <div className="home-header-content">
                 <div className="left-content">
                     <i className="fas fa-bars"></i>
-                    <div className="header-logo"></div>
+                    <img className="header-logo" src={logo}></img>
                 </div>
                 <div className="center-content">
                     <div className="child-content">
-                        <div><b>Chuyên môn</b></div>
-                        <div className="subs-title">tìm giáo viên theo môn học</div>
+                        <div><b><FormattedMessage id="homeheader.major"/> </b></div>
+                        <div className="subs-title"><FormattedMessage id="homeheader.search-teacher"/></div>
                     </div>
                     <div className="child-content">
-                        <div><b>Các chi nhánh</b></div>
-                        <div className="subs-title">chọn các trung tâm</div>
+                        <div><b><FormattedMessage id="homeheader.Affiliates"/></b></div>
+                        <div className="subs-title"><FormattedMessage id="homeheader.select-centers"/></div>
                     </div>
                     <div className="child-content">
-                        <div><b>Giáo viên</b></div>
-                        <div className="subs-title">chọn giáo viên giỏi</div>
+                        <div><b><FormattedMessage id="homeheader.teacher"/></b></div>
+                        <div className="subs-title"><FormattedMessage id="homeheader.select-teacher"/></div>
                     </div>
                     <div className="child-content">
-                        <div><b>Liên hệ hỗ trợ</b></div>
-                        <div className="subs-title">Các kỹ thuật viên hỗ trợ 24/7</div>
+                        <div><b><FormattedMessage id="homeheader.course"/></b></div>
+                        <div className="subs-title"><FormattedMessage id="homeheader.view-course"/></div>
                     </div>
                     </div>
                     <div className="right-content">
-                        <div className="support"><i className="fas fa-question-circle"></i> Hỗ trợ</div>
-                        <div className="flag">VN</div>
+                        <div className="support"><i className="fas fa-question-circle"></i>
+                            <FormattedMessage id="homeheader.support"/>
+                        </div>
+                        <div className="language-vi">VN</div>
+                        <div className="language-en">EN</div>
                     </div>
                 </div>
             </div>
             <div className="home-header-banner">
                 <div className="content-up">
-                <div className="title1">NỀN TẢNG TRI THỨC</div>
-                <div className="title2">ƯƠM MẦM TRÍ TUỆ VIỆT</div>
+                <div className="title1"><FormattedMessage id="banner.title1"/></div>
+                <div className="title2"><FormattedMessage id="banner.title2"/></div>
                 <div className="search">
                     <i className="fas fa-search"></i>
                     <input type="text" placeholder="Tìm môn học bạn muốn"/>
@@ -52,27 +57,27 @@ class HomeHeader extends Component {
                 <div className="options">
                     <div className="option-child">
                         <div className="icon-child"><i className="fas fa-infinity"></i></div>
-                        <div className="text-child">Toán Học</div>
+                        <div className="text-child"><FormattedMessage id="banner.math"/></div>
                     </div>
                     <div className="option-child">
                         <div className="icon-child"><i className="fas fa-infinity"></i></div>
-                        <div className="text-child">Vật Lý</div>
+                        <div className="text-child"><FormattedMessage id="banner.physic"/></div>
                     </div>
                     <div className="option-child">
                         <div className="icon-child"><i className="fas fa-procedures"></i></div>
-                        <div className="text-child">Hoá Học</div>
+                        <div className="text-child"><FormattedMessage id="banner.chemistry"/></div>
                     </div>
                     <div className="option-child">
                         <div className="icon-child"><i className="fas fa-procedures"></i></div>
-                        <div className="text-child">Sinh Học</div>
+                        <div className="text-child"><FormattedMessage id="banner.biology"/></div>
                     </div>
                     <div className="option-child">
                         <div className="icon-child"><i className="fas fa-infinity"></i></div>
-                        <div className="text-child">Ngữ Văn</div>
+                        <div className="text-child"><FormattedMessage id="banner.literature"/></div>
                     </div>
                     <div className="option-child">
                         <div className="icon-child"><i className="fas fa-infinity"></i></div>
-                        <div className="text-child">Tiếng Anh</div>
+                        <div className="text-child"><FormattedMessage id="banner.english"/></div>
                     </div>
                 </div>
                 </div>
@@ -85,7 +90,8 @@ class HomeHeader extends Component {
 
 const mapStateToProps = state => {
     return {
-        isLoggedIn: state.user.isLoggedIn
+        isLoggedIn: state.user.isLoggedIn,
+        lang: state.app.language,
     };
 };
 

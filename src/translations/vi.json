@@ -1,4 +1,26 @@
 {
+    "homeheader": {
+        "major": "Chuyên môn",
+        "search-teacher": "Tìm giáo viên theo môn học",
+        "Affiliates": "Các chi nhánh",
+        "select-centers": "Chọn các trung tâm",
+        "teacher": "Giáo viên",
+        "select-teacher": "Chọn giáo viên giỏi",
+        "course": "Các khóa học",
+        "view-course": "Xem các khóa học",
+        "support": "Hỗ trợ"
+
+    },
+    "banner":{
+        "title1": "NỀN TẢNG TRI THỨC",
+        "title2": "ƯƠM MẦM TRÍ TUỆ VIỆT",
+        "math": "Toán Học",
+        "physic": "Vật Lý",
+        "chemistry": "Hóa Học",
+        "biology": "Sinh Học",
+        "literature": "Ngữ Văn",
+        "english": "Tiếng Anh"
+    },
     "common": {
         "add": "Thêm",
         "edit": "Sửa",

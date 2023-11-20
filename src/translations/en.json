@@ -1,4 +1,26 @@
 {
+    "homeheader": {
+        "major": "Major",
+        "search-teacher": "Find teacher by major",
+        "Affiliates": "Affiliates",
+        "select-centers": "Select centers",
+        "teacher": "Teacher",
+        "select-teacher": "Choose a good teacher",
+        "course": "Courses",
+        "view-course": "View courses",
+        "support": "Support"
+
+    },
+    "banner":{
+        "title1": "KNOWLEDGE CENTER",
+        "title2": "VIETNAMESE INTELLECTUAL SEEDING",
+        "math": "Math",
+        "physic": "Physic",
+        "chemistry": "Chemistry",
+        "biology": "Biology",
+        "literature": "Literature",
+        "english": "English"
+    },
     "common": {
         "add": "Add",
         "edit": "Edit",
