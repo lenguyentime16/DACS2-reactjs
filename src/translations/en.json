@@ -1,7 +1,7 @@
 {
     "homeheader": {
-        "major": "Major",
-        "search-teacher": "Find teacher by major",
+        "specialty": "Specialty",
+        "search-teacher": "Find teacher by specialty",
         "Affiliates": "Affiliates",
         "select-centers": "Select centers",
         "teacher": "Teacher",

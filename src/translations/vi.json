@@ -1,7 +1,7 @@
 {
     "homeheader": {
-        "major": "Chuyên môn",
-        "search-teacher": "Tìm giáo viên theo môn học",
+        "specialty": "Chuyên môn",
+        "search-teacher": "Tìm giáo viên theo chuyên môn",
         "Affiliates": "Các chi nhánh",
         "select-centers": "Chọn các trung tâm",
         "teacher": "Giáo viên",
