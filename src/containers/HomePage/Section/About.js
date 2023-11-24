@@ -21,9 +21,9 @@ class About extends Component {
                 <iframe width="100%" height="400px" 
                 src="https://www.youtube.com/embed/HOKFLBD1NfI" 
                 title="Sinh viên nên nhận gia sư ở đâu để không BỊ LỪA? Top 5 trung tâm gia sư uy tín nhất Hà Nội." 
-                frameborder="0" 
+                frameBorder="0" 
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                allowfullscreen></iframe>
+                allowFullscreen></iframe>
 
                 </div>
                 <div className="content-right">
