@@ -49,6 +49,7 @@
 
     .section-body {
         .section-customize {
+            padding: 20px;
             .bg-image {
                 width: 278px;
                 height: 150px;
@@ -68,8 +69,8 @@
 
                 &.section-outstanding-teacher {
                     background-image: url('../../assets/specialty/toán.jpg');
-                    width: 120px;
-                    height: 120px;
+                    width: 150px;
+                    height: 150px;
                     border-radius: 50%;
                 }
 

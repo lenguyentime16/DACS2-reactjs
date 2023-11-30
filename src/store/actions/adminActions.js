@@ -1,6 +1,7 @@
 
 import actionTypes from "./actionTypes";
-import { getAllCodeService, createNewUserService, getAllUsers, deleteUserService } from "../../services/userService";
+import { getAllCodeService, createNewUserService, getAllUsers, 
+    deleteUserService,editUserService, getTopTeacherHomeService } from "../../services/userService";
 import { toast } from "react-toastify";
 
 export const fetchGenderStart = () => {
@@ -121,7 +122,7 @@ export const fetchAllUsersStart = () => {
 
     return async (dispatch, getState) => {
         try {
-            let res = await getAllUsers("ALL");
+            let res = await getAllUsers("ALL");      
             if (res && res.errCode === 0) {
                 dispatch(fetchAllUsersSuccess(res.users.reverse()));
             } else {
@@ -176,3 +177,60 @@ export const deleteUserSuccess =() =>({
 export const deleteUserFailed =() =>({
     type: actionTypes.DELETE_USER_FAILDED
 })
+
+export const editAUser =(data)=>{
+    return async (dispatch, getState) => {
+        try {
+            let res = await editUserService(data) ;
+            if (res && res.errCode === 0) {
+                toast.success("Updata a user succeed!")
+                dispatch(editUserSuccess());
+                dispatch(fetchAllUsersStart());
+            } else {
+                toast.error("Update a user error!")
+                dispatch(editUserFailed());
+            }
+        }
+        catch(e) {
+            toast.error("Update a user error!")
+            dispatch(editUserFailed());
+            console.log('EditUserFailed error',e);
+        } 
+    
+    }
+}
+
+export const editUserSuccess = () => ({
+    type: actionTypes.EDIT_USER_SUCCESS
+})
+
+export const editUserFailed = () => ({
+    type: actionTypes.EDIT_USER_FAILDED
+})
+
+export const fetchTopTeacher = () => {
+    return async (dispatch, getState) => {
+        try {
+           let res = await getTopTeacherHomeService('');
+           if(res && res.errCode === 0) {
+            dispatch({
+                type: actionTypes.FETCH_TOP_TEACHER_SUCCESS,
+                dataTeachers: res.data
+            })
+           } else {
+            dispatch({
+                type: actionTypes.FETCH_TOP_TEACHER_FAILDED
+            })
+           }
+            }
+        
+        catch(e) {
+          console.log('FETCH_TOP_TEACHER_FAILDED',e)
+          dispatch({
+            type: actionTypes.FETCH_TOP_TEACHER_FAILDED
+          })
+        } 
+    
+    }
+}
+// let res1 =await getTopTeacherHomeService(3);
