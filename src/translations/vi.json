@@ -53,6 +53,10 @@
         "save": "Lưu người dùng",
         "edit": "Lưu thay đổi"
         
+    },
+    "homepage":{
+        "outstanding-teacher": "Giảng viên nổi bật tuần qua",
+        "more-infor": "Xem Thêm"
     }
     
 }

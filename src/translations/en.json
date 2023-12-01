@@ -54,6 +54,10 @@
         "save": "Save user",
         "edit": "Edit User"
         
+    },
+    "homepage":{
+        "outstanding-teacher": "Outstanding lecturer of the week",
+        "more-infor": "More Infor"
     }
     
 }

@@ -28,13 +28,17 @@ class OutStandingTeacher extends Component {
     render() {
         let arrTeachers = this.state.arrTeachers;
         let {language} = this.props;
-        arrTeachers = arrTeachers.concat(arrTeachers).concat(arrTeachers)
+        // arrTeachers = arrTeachers.concat(arrTeachers).concat(arrTeachers)
         return (
             <div className="section-share section-outstanding-teacher">
                 <div className="section-container">
                     <div className="section-header">
-                        <span className="title-section">Giảng viên nổi bật tuần qua</span>
-                        <button className="btn-section">xem thêm</button>
+                        <span className="title-section">
+                            <FormattedMessage id='homepage.outstanding-teacher'/>
+                        </span>
+                        <button className="btn-section">
+                        <FormattedMessage id='homepage.more-infor'/> 
+                        </button>
                     </div>
                     <div className="section-body">
                         <Slider {...this.props.settings}>
