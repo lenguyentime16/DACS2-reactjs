@@ -10,7 +10,7 @@ export const adminMenu = [
         },
 
         {
-            name: 'menu.admin.manage-teacher', link: '/system/user-teacher'
+            name: 'menu.admin.manage-teacher', link: '/system/manage-teacher'
         },
 
         {
