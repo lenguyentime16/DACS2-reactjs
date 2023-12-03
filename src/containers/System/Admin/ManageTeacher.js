@@ -10,12 +10,8 @@ import MdEditor from 'react-markdown-editor-lite';
 import 'react-markdown-editor-lite/lib/index.css';
 import "./ManageTeacher.scss";
 import Select from 'react-select';
+import {LANGUAGES}  from "../../../utils";
 
-const options = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' },
-];
 
 
 const mdParser = new MarkdownIt(/* Markdown-it options */);
@@ -27,18 +23,47 @@ class ManageTeacher extends Component {
         this.state = {
             contentMarkdown:'',
             contentHTML:'',
-            selectedTeacher:'',
+            selectedOption:'',
             description:'',
+            listTeachers:[]
 
         }   
     }
 
     componentDidMount(){
+        this.props.fetchAllTeachers()
+    }
 
+    buildDataInputSelect = (inputData) => {
+        let result = [];
+        let {language} = this.props;
+        if(inputData && inputData.length >0) {
+            inputData.map((item,index) => {   
+            let object = {};
+            let labelVi = `${item.lastName} ${item.firstName}`;
+            let labelEn = `${item.lastName} ${item.firstName}`;
+            object.label = language === LANGUAGES.VI ? labelVi : labelEn
+            object.value = item.id;
+            result.push(object)})
+         
+               
+        }
+        return result
     }
 
     componentDidUpdate(prevProps, prevState, snapshot){
-
+        if(prevProps.allTeachers !== this.props.allTeachers) {
+            let dataSelect = this.buildDataInputSelect( this.props.allTeachers)
+            this.setState({
+               listTeachers: dataSelect
+            })
+        }
+        if (prevProps.language !== this.props.language) {
+            let dataSelect = this.buildDataInputSelect( this.props.allTeachers)
+            this.setState({
+                listTeachers:dataSelect
+             })
+        }
     }
 
     handleEditorChange = ({ html, text }) => {
@@ -49,10 +74,16 @@ class ManageTeacher extends Component {
     }
 
     handleSaveContentMarkdown= ()=>{
-        console.log('check state', this.state)
+
+        this.props.saveDetailTeacher({
+            contentHTML: this.state.contentHTML,
+            contentMarkdown:this.state.contentMarkdown,
+            description: this.state.description,
+            teacherId:this.state.selectedOption.value
+        })
     }
 
-    handleChange = selectedOption => {
+    handleChange = (selectedOption) => {
         this.setState({ selectedOption });
         //   console.log(`Option selected:`, this.state.selectedOption)
     };
@@ -72,13 +103,13 @@ class ManageTeacher extends Component {
                     <div className='content-left form-group'> 
                         <label>Chọn giáo viên</label>
                         <Select
-                            value={this.state.selectedTeacher}
+                            value={this.state.selectedOption}
                             onChange={this.handleChange}
-                            options={options}
+                            options={this.state.listTeachers}
                         /> 
                     </div>
                     <div className='content-right'>
-                        <lable>Thông tin giới thiệu:</lable>
+                        <label>Thông tin giới thiệu:</label>
                         <textarea className='form-control' rows="4"
                             onChange={(event) => this.handleOnChangeDesc(event)}
                             value={this.state.description}
@@ -106,14 +137,15 @@ class ManageTeacher extends Component {
 
 const mapStateToProps = state => {
     return {
-        listUsers: state.admin.users
+        language: state.app.language,
+        allTeachers: state.admin.allTeachers
     };  
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchUserRedux : () => dispatch(actions.fetchAllUsersStart()),
-        deleteAUserRedux: (id) => dispatch(actions.deleteAUser(id)),
+        fetchAllTeachers: (id) => dispatch(actions.fetchAllTeachers()),
+        saveDetailTeacher: (data) => dispatch(actions.saveDetailTeacher(data))
         
     };
 };

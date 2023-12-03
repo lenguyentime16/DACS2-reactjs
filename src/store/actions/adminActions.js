@@ -1,7 +1,7 @@
 
 import actionTypes from "./actionTypes";
 import { getAllCodeService, createNewUserService, getAllUsers, 
-    deleteUserService,editUserService, getTopTeacherHomeService } from "../../services/userService";
+    deleteUserService,editUserService, getTopTeacherHomeService, getAllTeachers,saveDetailTeacherService } from "../../services/userService";
 import { toast } from "react-toastify";
 
 export const fetchGenderStart = () => {
@@ -233,4 +233,62 @@ export const fetchTopTeacher = () => {
     
     }
 }
+
+export const fetchAllTeachers = () => {
+    return async (dispatch, getState) => {
+        try {
+           let res = await getAllTeachers();
+           if(res && res.errCode === 0) {
+            dispatch({
+                type: actionTypes.FETCH_ALL_TEACHER_SUCCESS,
+                dataTeach: res.data
+            })
+           } else {
+            dispatch({
+                type: actionTypes.FETCH_ALL_TEACHER_FAILDED
+            })
+           }
+            }
+        
+        catch(e) {
+          console.log('FETCH_ALL_TEACHER_FAILDED',e)
+          dispatch({
+            type: actionTypes.FETCH_ALL_TEACHER_FAILDED
+          })
+        } 
+    
+    }
+}
+
+export const saveDetailTeacher = (data) => {
+    return async (dispatch, getState) => {
+        try {
+           let res = await saveDetailTeacherService(data);
+           if(res && res.errCode === 0) {
+            toast.success("Save the user succeed!");
+            dispatch({
+                type: actionTypes.SAVE_DETAIL_TEACHER_SUCCESS,
+            })
+           } else {
+            toast.error("Save the user error!");
+            console.log(res);
+            dispatch({
+                type: actionTypes.SAVE_DETAIL_TEACHER_FAILDED
+            })
+           }
+            }
+        
+        catch(e) {
+            toast.error("Save the user error!");
+          console.log('SAVE_DETAIL_TEACHER_FAILDED',e)
+          dispatch({
+            type: actionTypes.SAVE_DETAIL_TEACHER_FAILDED
+          })
+        } 
+    
+    }
+}
+
+
+
 // let res1 =await getTopTeacherHomeService(3);

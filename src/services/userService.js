@@ -27,11 +27,21 @@ const editUserService = (inputData) => {
 }
 
 const getAllCodeService = (inputType) => {
-    return axios.get(`api/allcode?type=${inputType}`)
+    return axios.get(`/api/allcode?type=${inputType}`)
 }
 
 const getTopTeacherHomeService = (limit) => {
-    return axios.get(`api/top-teacher-home?limit=${limit}`)
+    return axios.get(`/api/top-teacher-home?limit=${limit}`)
 }
-export { handleLoginApi, getAllUsers,createNewUserService,deleteUserService,editUserService, getAllCodeService,getTopTeacherHomeService} 
+
+const getAllTeachers = () => {
+    return axios.get(`/api/get-all-teachers`)
+}
+
+const saveDetailTeacherService = (data) => {
+    return axios.post(`/api/save-infor-teachers`,data)
+}
+export { handleLoginApi, getAllUsers,createNewUserService,
+        deleteUserService,editUserService, getAllCodeService,
+        getTopTeacherHomeService,getAllTeachers,saveDetailTeacherService} 
 
