@@ -41,7 +41,11 @@ const getAllTeachers = () => {
 const saveDetailTeacherService = (data) => {
     return axios.post(`/api/save-infor-teachers`,data)
 }
+
+const getDetailInforTeacher = (inputId) => {
+    return axios.get(`/api/get-detail-teacher-by-id?id=${inputId}`)
+}
 export { handleLoginApi, getAllUsers,createNewUserService,
         deleteUserService,editUserService, getAllCodeService,
-        getTopTeacherHomeService,getAllTeachers,saveDetailTeacherService} 
+        getTopTeacherHomeService,getAllTeachers,saveDetailTeacherService,getDetailInforTeacher} 
 

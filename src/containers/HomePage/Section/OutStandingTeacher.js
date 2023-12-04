@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import Slider from 'react-slick';
 import *as actions from '../../../store/actions';
 import {LANGUAGES} from '../../../utils';
+import {withRouter} from 'react-router'
 
 
 class OutStandingTeacher extends Component {
@@ -24,6 +24,13 @@ class OutStandingTeacher extends Component {
     }
     componentDidMount() {
         this.props.loadTopTeachers();
+    }
+
+    handleViewDetailTeacher = (teacher) => {
+        if(this.props.history) {
+            this.props.history.push(`/detail-teacher/${teacher.id}`)
+        }
+       
     }
     render() {
         let arrTeachers = this.state.arrTeachers;
@@ -52,7 +59,7 @@ class OutStandingTeacher extends Component {
                                 let nameEn = `${item.positionData.valueEn}, ${item.firstName} ${item.lastName}`; 
 
                                 return (
-                                <div className="section-customize" key={index}>
+                                <div className="section-customize" key={index} onClick={() => this.handleViewDetailTeacher(item)}>
                                 <div className="section-border">
                                     <div className="outer-bg">
                                         <div className="bg-image section-outstanding-teacher" 
@@ -92,4 +99,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(OutStandingTeacher);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(OutStandingTeacher));
