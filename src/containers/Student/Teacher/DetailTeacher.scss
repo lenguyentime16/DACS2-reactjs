@@ -1,30 +1,29 @@
 .teacher-detail-container {
     height: 500px;
-    margin: 0 100px;
-    border: 1px solid red;
+
 
     .intro-teacher {
         display: flex;
-        border: 1px solid grey;
+        margin : 0 100px;
 
         .content-left {
-            width: 20%;
-            background: center center no-repeat;
-            width: 120px;
-            height: 120px;
+            width        : 20%;
+            background   : center center no-repeat;
+            width        : 120px;
+            height       : 120px;
             border-radius: 50%;
-            margin: 10px 20px;
+            margin       : 10px 20px;
         }
 
         .content-right {
-            width: 80%;
-            display: flex;
+            width         : 80%;
+            display       : flex;
             flex-direction: column;
-            padding-left: 10px;
+            padding-left  : 10px;
 
             .up {
                 padding-top: 15px;
-                font-size: 20px;
+                font-size  : 20px;
                 font-weight: 600;
             }
 
@@ -32,5 +31,26 @@
                 padding-top: 10px;
             }
         }
+    }
+
+    .detail-infor-teacher {
+        border-top      : 1px solid #ddd;
+        border-bottom   : 1px solid #ddd;
+        border-radius   : 10px;
+        background-color: #f9f9f9;
+        padding         : 20px 100px;
+
+
+        h3 {
+            font-size: 17px;
+        }
+
+        img {
+            width: 100%;
+        }
+    }
+
+    .comment-teacher {
+        height: 50px;
     }
 }

@@ -16,7 +16,7 @@ class DetailTeacher extends Component {
     }
 
     async componentDidMount() {
-        if(this.props.match && this.props.match.params && this.props.match.params.id) {
+        if (this.props.match && this.props.match.params && this.props.match.params.id) {
             let id = this.props.match.params.id;
             let res = await getDetailInforTeacher(id);
             if (res && res.errCode === 0) {
@@ -32,64 +32,64 @@ class DetailTeacher extends Component {
     }
 
     render() {
-       let { language } = this.props;
+        let { language } = this.props;
 
-       let { detailTeacher } = this.state;
+        let { detailTeacher } = this.state;
 
-       let nameVi = '', nameEn = '';
+        let nameVi = '', nameEn = '';
 
-       if(detailTeacher && detailTeacher.positionData) {
-        nameVi = `${detailTeacher.positionData.valueVi}, ${detailTeacher.lastName} ${detailTeacher.firstName}`;
-        nameEn = `${detailTeacher.positionData.nameEn}, ${detailTeacher.firstName} ${detailTeacher.lastName}`;
-       }
+        if (detailTeacher && detailTeacher.positionData) {
+            nameVi = `${detailTeacher.positionData.valueVi}, ${detailTeacher.lastName} ${detailTeacher.firstName}`;
+            nameEn = `${detailTeacher.positionData.valueEn}, ${detailTeacher.firstName} ${detailTeacher.lastName}`;
+        }
 
-       return (
-        <>
-            <HomeHeader 
-                isShowBanner = {false}
-            />
-            <div className="teacher-detail-container">
-                <div className="intro-teacher">
-                    <div 
-                    className="content-left" 
-                    style={{backgroundImage: `url(${detailTeacher && detailTeacher.image ? detailTeacher.image : ''})`}}
-                    >
+        return (
+            <>
+                <HomeHeader
+                    isShowBanner={false}
+                />
+                <div className="teacher-detail-container">
+                    <div className="intro-teacher">
+                        <div
+                            className="content-left"
+                            style={{ backgroundImage: `url(${detailTeacher && detailTeacher.image ? detailTeacher.image : ''})` }}
+                        >
+
+                        </div>
+                        <div className="content-right">
+                            <div className="up">
+                                {language === LANGUAGES.VI ? nameVi : nameEn}
+                            </div>
+                            <div className="down">
+                                {detailTeacher && detailTeacher.Markdown
+                                    && detailTeacher.Markdown.description
+                                    &&
+                                    <span>
+                                        {detailTeacher.Markdown.description}
+                                    </span>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="schedule-teacher">
 
                     </div>
-                    <div className="content-right">
-                    <div className="up">
-                        {language === LANGUAGES.VI ? nameVi : nameEn}
-                    </div>
-                    <div className="down">
-                        {detailTeacher && detailTeacher.Markdown 
-                            && detailTeacher.Markdown.description
-                            && 
-                            <span>
-                                {detailTeacher.Markdown.description}
-                            </span>
+                    <div className="detail-infor-teacher">
+                        {detailTeacher && detailTeacher.Markdown && detailTeacher.Markdown.contentHTML
+                            &&
+                            <div dangerouslySetInnerHTML={{ __html: detailTeacher.Markdown.contentHTML }}>
+                            </div>
                         }
+
                     </div>
+                    <div className="comment-teacher">
+
                     </div>
                 </div>
-            
-            <div className="schedule-teacher">
-                
-            </div>
-            <div className="detail-infor-teacher">
-                {detailTeacher && detailTeacher.Markdown && detailTeacher.Markdown.contentHTML 
-                &&
-                <div dangerouslySetInnerHTML={{__html: detailTeacher.Markdown.contentHTML}}>
-                    </div>
-                }
-                
-            </div>
-            <div className="comment-teacher">
 
-            </div>
-            </div>
-
-        </>
-       );
+            </>
+        );
     }
 }
 
@@ -105,4 +105,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(DetailTeacher);
+export default connect(mapStateToProps, mapDispatchToProps)(DetailTeacher);
