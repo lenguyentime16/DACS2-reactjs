@@ -37,6 +37,9 @@
             "handbook": "Handbook",
             "manage-handbook": "Manage handbook" 
 
+        },
+        "teacher":{
+            "manage-schedule":  "Manage Teacher's schedule"
         }
     },
     "manage-user": {

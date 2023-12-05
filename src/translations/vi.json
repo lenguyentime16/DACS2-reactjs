@@ -36,6 +36,9 @@
             "manage-specialty":"quản lý chuyên môn",
             "handbook":"cẩm nang",
             "manage-handbook":"quản lý cẩm nang"
+        },
+        "teacher":{
+            "manage-schedule":  "Quản lí thời khóa biểu"
         }
     },
     "manage-user": {
