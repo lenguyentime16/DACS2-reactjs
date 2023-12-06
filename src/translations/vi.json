@@ -60,6 +60,12 @@
     "homepage":{
         "outstanding-teacher": "Giảng viên nổi bật tuần qua",
         "more-infor": "Xem Thêm"
+    },
+    "manage-schedule":{
+        "title": "Quản lý thời khóa biểu",
+        "choose-teacher": "Chọn giáo viên",
+        "choose-date": "Chọn ngày",
+        "save-infor": "Lưu thông tin"
     }
     
 }

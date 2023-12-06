@@ -10,7 +10,7 @@ class Teacher extends Component {
         
         return (
             <React.Fragment>
-            {isLoggedIn && <Header />} 
+                {isLoggedIn && <Header />} 
             <div className="system-container">
                 <div className="system-list">
                     <Switch>

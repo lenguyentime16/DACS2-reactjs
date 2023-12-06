@@ -61,6 +61,12 @@
     "homepage":{
         "outstanding-teacher": "Outstanding lecturer of the week",
         "more-infor": "More Infor"
+    },
+    "manage-schedule":{
+        "title": "Manage schedule",
+        "choose-teacher": "Choose teacher",
+        "choose-date": "Choose date",
+        "save-infor": "Save infor"
     }
     
 }
