@@ -5,6 +5,7 @@ import './DetailTeacher.scss';
 import { getDetailInforTeacher } from '../../../services/userService';
 import { FormattedMessage } from 'react-intl';
 import { LANGUAGES } from '../../../utils';
+import TeacherSchedule from './TeacherSchedule';
 
 
 class DetailTeacher extends Component {
@@ -73,6 +74,14 @@ class DetailTeacher extends Component {
                     </div>
 
                     <div className="schedule-teacher">
+                        <div className="content-left">
+                            <TeacherSchedule 
+                            teacherIdFromParent = {detailTeacher && detailTeacher.id ? detailTeacher.id : -1}
+                            />
+                        </div>
+                        <div className="content-right">
+
+                        </div>
 
                     </div>
                     <div className="detail-infor-teacher">

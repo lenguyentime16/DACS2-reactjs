@@ -45,7 +45,15 @@ const saveDetailTeacherService = (data) => {
 const getDetailInforTeacher = (inputId) => {
     return axios.get(`/api/get-detail-teacher-by-id?id=${inputId}`)
 }
+
+const saveBulkScheduleTeacher = (data) => {
+    return axios.post(`/api/bulk-create-schedule`,data)
+}
+const getScheduleTeacherByDate = (teacherId, date) => {
+    return axios.get(`/api/get-schedule-teacher-by-date?teacherId=${teacherId}&date=${date}`)
+}
 export { handleLoginApi, getAllUsers,createNewUserService,
         deleteUserService,editUserService, getAllCodeService,
-        getTopTeacherHomeService,getAllTeachers,saveDetailTeacherService,getDetailInforTeacher} 
+        getTopTeacherHomeService,getAllTeachers,saveDetailTeacherService,getDetailInforTeacher,saveBulkScheduleTeacher,
+        getScheduleTeacherByDate} 
 
