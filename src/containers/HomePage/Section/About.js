@@ -23,7 +23,7 @@ class About extends Component {
                 title="Sinh viên nên nhận gia sư ở đâu để không BỊ LỪA? Top 5 trung tâm gia sư uy tín nhất Hà Nội." 
                 frameBorder="0" 
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                allowFullscreen></iframe>
+                allowFullScreen></iframe>
 
                 </div>
                 <div className="content-right">
