@@ -66,6 +66,14 @@
         "choose-teacher": "Chọn giáo viên",
         "choose-date": "Chọn ngày",
         "save-infor": "Lưu thông tin"
+    },
+    "student":{
+        "detail-teacher":{
+            "schedule" : "Lịch học",
+            "no-schedule" : "Giáo viên không có lịch học nào trong ngày này, hãy chọn thời gian khác!",
+            "choose": "Chọn ",
+            "book-free" : " và đặt (miễn phí)"
+        }
     }
     
 }

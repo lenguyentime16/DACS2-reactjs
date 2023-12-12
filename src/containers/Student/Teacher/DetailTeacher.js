@@ -12,17 +12,22 @@ class DetailTeacher extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            detailTeacher: {}
+            detailTeacher: {},
+            currentTeacherId: -1,
         }
     }
 
     async componentDidMount() {
         if (this.props.match && this.props.match.params && this.props.match.params.id) {
             let id = this.props.match.params.id;
+            this.setState({
+                currentTeacherId: id
+            })
             let res = await getDetailInforTeacher(id);
             if (res && res.errCode === 0) {
                 this.setState({
-                    detailTeacher: res.data
+                    detailTeacher: res.data,
+                    currentTeacherId: id
                 })
             }
         }
@@ -76,7 +81,7 @@ class DetailTeacher extends Component {
                     <div className="schedule-teacher">
                         <div className="content-left">
                             <TeacherSchedule 
-                            teacherIdFromParent = {detailTeacher && detailTeacher.id ? detailTeacher.id : -1}
+                            teacherIdFromParent = {this.state.currentTeacherId}
                             />
                         </div>
                         <div className="content-right">

@@ -67,6 +67,14 @@
         "choose-teacher": "Choose teacher",
         "choose-date": "Choose date",
         "save-infor": "Save infor"
+    },
+    "student":{
+        "detail-teacher":{
+            "schedule" : "Schedule",
+            "no-schedule" : "The teacher doesn't have any classes scheduled for this day, please choose another time!",
+            "choose": "Choose ",
+            "book-free" : " and book (free)"
+        }
     }
     
 }

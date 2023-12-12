@@ -133,12 +133,20 @@ class ManageSchedule extends Component {
             arrSchedule: result,
             teacherId: selectedTeacher.value,
             formatedDate: formatedDate
-        });
+        })
+
+        if(res && res.infor.errMessage === "OK"){
+            toast.success("Save infor succeed!")
+        }else{
+            toast.error("Err saveBulkScheduleTeacher")
+            console.log("Show res: ",res)
+        }
     }
     render() {
         console.log(this.state)
         let { rangeTime } = this.state;
         let { language } = this.props;
+        let yesterday = new Date(new Date().setDate(new Date().getDate()-1));
         return (
 
             <div className='manage-schedule-container'>
@@ -161,7 +169,7 @@ class ManageSchedule extends Component {
                                 onChange={this.handleOnChangeDatePicker}
                                 className='form-control'
                                 value={this.state.currentDate}
-                                minDate={new Date()}
+                                minDate={yesterday}
                             />
                         </div>
                         <div className='col-12 pick-hour-container'>

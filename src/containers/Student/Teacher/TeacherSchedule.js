@@ -5,6 +5,7 @@ import moment from 'moment';
 import localization from 'moment/locale/vi';
 import { getScheduleTeacherByDate } from '../../../services/userService';
 import { LANGUAGES } from '../../../utils';
+import { FormattedMessage } from 'react-intl';
 
 class TeacherSchedule extends Component {
 
@@ -18,37 +19,59 @@ class TeacherSchedule extends Component {
 
     async componentDidMount() {
         let { language } = this.props;
-
-        console.log('moment vie: ', moment(new Date()).format('dddd - DD/MM'));
-        console.log('moment en: ', moment(new Date()).locale('en').format("ddd - DD/MM"));
-        this.setArrDays(language);
+        let allDays = this.getArrDays(language);
+        this.setState({
+            allDays: allDays,
+        })
     }
 
     capitalizeFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
-    setArrDays = (language) => {
+    getArrDays = (language) => {
         let allDays = []
         for (let i = 0; i < 7; i++) {
             let object = {};
             if (language === LANGUAGES.VI) {
-                let lableVi=moment(new Date()).add(i, 'days').format('dddd - DD/MM');
-                object.label = this.capitalizeFirstLetter(lableVi)
+                if (i === 0) {
+                    let ddMM = moment(new Date()).format('DD/MM');
+                    let today = `Hôm nay - ${ddMM}`;
+                    object.label = today;
+                }
+                else {
+                    let lableVi = moment(new Date()).add(i, 'days').format('dddd - DD/MM');
+                    object.label = this.capitalizeFirstLetter(lableVi)
+                }
+
             } else {
-                object.label = moment(new Date()).add(i, 'days').locale('en').format("ddd - DD/MM")
+                if (i === 0) {
+                    let ddMM = moment(new Date()).format('DD/MM');
+                    let today = `Today - ${ddMM}`;
+                    object.label = today;
+                } else {
+                    object.label = moment(new Date()).add(i, 'days').locale('en').format("ddd - DD/MM")
+                }
             }
             object.value = moment(new Date()).add(i, 'days').startOf('day').valueOf();
             allDays.push(object);
         }
-        this.setState({
-            allDays: allDays,
-        })
+        return allDays;
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
+    async componentDidUpdate(prevProps, prevState, snapshot) {
         if (this.props.language !== prevProps.language) {
-            this.setArrDays(this.props.language);
+            let allDays = this.getArrDays(this.props.language);
+            this.setState({
+                allDays: allDays
+            })
+        }
+        if (this.props.teacherIdFromParent !== prevProps.teacherIdFromParent) {
+            let allDays = this.getArrDays(this.props.language);
+            let res = await getScheduleTeacherByDate(this.props.teacherIdFromParent, allDays[0].value);
+            this.setState({
+                allAvailableTime: res.data ? res.data : []
+            })
         }
     }
 
@@ -90,20 +113,34 @@ class TeacherSchedule extends Component {
                 </div>
                 <div className="all-available-time">
                     <div className='text-calendar'>
-                        <i className='fas fa-calendar-alt'><span>Lịch học</span></i>
+                        <i className='fas fa-calendar-alt'>
+                            <span><FormattedMessage id='student.detail-teacher.schedule' /></span>
+                        </i>
                     </div>
                     <div className='time-content'>
                         {allAvailableTime && allAvailableTime.length > 0 ?
-                            allAvailableTime.map((item, index) => {
-                                let timeDisplay = language === LANGUAGES.VI ?
-                                    item.timeTypeData.valueVi : item.timeTypeData.valueEn;
-                                return (
-                                    <button key={index}>{timeDisplay}</button>
-                                )
-                            })
+                            <React.Fragment>
+                                <div className='time-content-btns'>
+                                    {allAvailableTime.map((item, index) => {
+                                        let timeDisplay = language === LANGUAGES.VI ?
+                                            item.timeTypeData.valueVi : item.timeTypeData.valueEn;
+                                        return (
+                                            <button key={index}>{timeDisplay}</button>
+                                        )
+                                    })}
+                                </div>
 
+
+                                <div className='book-free'>
+                                    <span><FormattedMessage id='student.detail-teacher.choose' />
+                                        <i className='far fa-hand-point-up'></i>
+                                        <FormattedMessage id='student.detail-teacher.book-free' />
+                                    </span>
+                                </div>
+
+                            </React.Fragment>
                             :
-                            <div>Giáo viên không có lịch học nào trong ngày này, hãy chọn thời gian khác</div>
+                            <div className='no-schedule'><FormattedMessage id='student.detail-teacher.no-schedule' /></div>
                         }
                     </div>
                 </div>
