@@ -318,6 +318,43 @@ export const fetchAllScheduleTime = () => {
     }
 }
 
+export const getRequiredTeacherInfor = () => {
 
+    return async (dispatch, getState) => {
+        try {
+            dispatch({ type: actionTypes.FETCH_REQUIRED_TEACHER_INFOR_START })
+            let resPrice = await getAllCodeService("PRICE");
+            let resPayment = await getAllCodeService("PAYMENT");
+            let resProvince = await getAllCodeService("PROVINCE");
+            if (resPrice && resPrice.errCode === 0 &&
+                resPayment && resPayment.errCode === 0 &&
+                resProvince && resProvince.errCode === 0) {
+                let data = {
+                    resPrice: resPrice.data,
+                    resPayment: resPayment.data,
+                    resProvince: resProvince.data
+                }
+                dispatch(fetchRequiredTeacherInforSuccess(data));
+            } else {
+                dispatch(fetchRequiredTeacherInforFailed());
+            }
+        }
+        catch (e) {
+            dispatch(fetchRequiredTeacherInforFailed());
+            console.log('error', e);
+        }
+
+    }
+}
+
+
+export const fetchRequiredTeacherInforSuccess = (allRequiredData) => ({
+    type: actionTypes.FETCH_REQUIRED_TEACHER_INFOR_SUCCESS,
+    data: allRequiredData
+})
+
+export const fetchRequiredTeacherInforFailed = () => ({
+    type: actionTypes.FETCH_REQUIRED_TEACHER_INFOR_FAILDED
+})
 
 // let res1 =await getTopTeacherHomeService(3);

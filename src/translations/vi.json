@@ -74,6 +74,15 @@
             "choose": "Chọn ",
             "book-free" : " và đặt (miễn phí)"
         }
+    },
+    "admin":{
+        "manage-teacher":{
+            "title":"Tạo thêm thông tin giáo viên",
+            "select-teacher": "Chọn giáo viên",
+            "intro": "Thông tin giới thiệu:",
+            "add" : "Tạo thông tin",
+            "save" :"Lưu thong tin"
+        }
     }
     
 }

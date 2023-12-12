@@ -75,6 +75,15 @@
             "choose": "Choose ",
             "book-free" : " and book (free)"
         }
+    },
+    "admin":{
+        "manage-teacher":{
+            "title":"Creating more teacher information.",
+            "select-teacher": "Select teacher",
+            "intro": "Introduction Information:",
+            "add" : "Create infor",
+            "save" :"Save infor"
+        }
     }
     
 }
