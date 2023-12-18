@@ -81,7 +81,13 @@
             "select-teacher": "Chọn giáo viên",
             "intro": "Thông tin giới thiệu:",
             "add" : "Tạo thông tin",
-            "save" :"Lưu thong tin"
+            "save" :"Lưu thong tin",
+            "price": "Học phí",
+            "payment": "Phương thức thanh toán",
+            "province": "Tỉnh thành",
+            "class-name":"Tên lớp học",
+            "class-address": "Địa chỉ lớp học",
+            "note": "Ghi chú"
         }
     }
     
