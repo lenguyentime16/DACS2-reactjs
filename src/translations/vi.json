@@ -73,6 +73,13 @@
             "no-schedule" : "Giáo viên không có lịch học nào trong ngày này, hãy chọn thời gian khác!",
             "choose": "Chọn ",
             "book-free" : " và đặt (miễn phí)"
+        },
+        "extra-infor-teacher": {
+            "text-address": "Địa chỉ lớp học",
+            "price": "Học phí: ",
+            "detail": "Xem chi tiết",
+            "payment": "Học sinh có thể thanh toán chi phí bằng hình thức: ",
+            "hide-price": "Ẩn bảng giá"
         }
     },
     "admin":{

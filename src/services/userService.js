@@ -52,8 +52,11 @@ const saveBulkScheduleTeacher = (data) => {
 const getScheduleTeacherByDate = (teacherId, date) => {
     return axios.get(`/api/get-schedule-teacher-by-date?teacherId=${teacherId}&date=${date}`)
 }
+const getExtraInforTeacherById = (teacherId) => {
+    return axios.get(`/api/get-extra-infor-teacher-by-id?teacherId=${teacherId}`)
+}
 export { handleLoginApi, getAllUsers,createNewUserService,
         deleteUserService,editUserService, getAllCodeService,
         getTopTeacherHomeService,getAllTeachers,saveDetailTeacherService,getDetailInforTeacher,saveBulkScheduleTeacher,
-        getScheduleTeacherByDate} 
+        getScheduleTeacherByDate,getExtraInforTeacherById} 
 
