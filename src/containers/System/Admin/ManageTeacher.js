@@ -159,14 +159,46 @@ class ManageTeacher extends Component {
 
     handleChangeSelect = async (selectedOption) => {
         this.setState({ selectedOption });
+        let {listPayment, listPrice, listProvince } = this.state;
+
         let res = await getDetailInforTeacher(selectedOption.value);
         if (res && res.errCode === 0 && res.data && res.data.Markdown) {
             let markdown = res.data.Markdown;
+
+            let addressClassRoom ='', nameClassRoom='', note='',paymentId='',
+                priceId='',provinceId='',selectedPayment='',selectedPrice='',selectProvince='';
+
+            if(res.data.Teacher_Infor) {
+                addressClassRoom = res.data.Teacher_Infor.addressClassRoom;
+                nameClassRoom = res.data.Teacher_Infor.nameClassRoom;
+                note = res.data.Teacher_Infor.note;
+                paymentId = res.data.Teacher_Infor.paymentId;
+                priceId = res.data.Teacher_Infor.priceId;
+                provinceId = res.data.Teacher_Infor.provinceId;
+
+                selectedPayment = listPayment.find(item=> {
+                    return item && item.value === paymentId
+                })
+                
+                selectedPrice = listPrice.find(item => {
+                    return item && item.value === priceId
+                })
+
+                selectProvince = listProvince.find(item => {
+                    return item && item.value === provinceId
+                })
+            }    
             this.setState({
                 contentHTML: markdown.contentHTML,
                 contentMarkdown: markdown.contentMarkdown,
                 description: markdown.description,
-                hasOlData: true
+                hasOlData: true,
+                addressClassRoom: addressClassRoom,
+                nameClassRoom: nameClassRoom,
+                note:note,
+                selectedPayment:selectedPayment,
+                selectedPrice: selectedPrice,
+                selectProvince: selectProvince
             })
         } else {
             this.setState({
@@ -174,6 +206,9 @@ class ManageTeacher extends Component {
                 contentMarkdown: "",
                 description: "",
                 hasOlData: false,
+                addressClassRoom: '',
+                nameClassRoom: '',
+                note: ''
             })
         }
         console.log(`Option selected :`, res);

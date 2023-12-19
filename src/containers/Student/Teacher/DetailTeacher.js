@@ -6,6 +6,7 @@ import { getDetailInforTeacher } from '../../../services/userService';
 import { FormattedMessage } from 'react-intl';
 import { LANGUAGES } from '../../../utils';
 import TeacherSchedule from './TeacherSchedule';
+import TeacherExtraInfor from './TeacherExtraInfor';
 
 
 class DetailTeacher extends Component {
@@ -85,7 +86,7 @@ class DetailTeacher extends Component {
                             />
                         </div>
                         <div className="content-right">
-
+                            <TeacherExtraInfor teacherIdFromParent = {this.state.currentTeacherId} />
                         </div>
 
                     </div>
