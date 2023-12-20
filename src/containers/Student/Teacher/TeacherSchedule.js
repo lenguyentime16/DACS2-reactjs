@@ -6,6 +6,7 @@ import localization from 'moment/locale/vi';
 import { getScheduleTeacherByDate } from '../../../services/userService';
 import { LANGUAGES } from '../../../utils';
 import { FormattedMessage } from 'react-intl';
+import BookingModal from './Modal/BookingModal';
 
 class TeacherSchedule extends Component {
 
@@ -13,7 +14,9 @@ class TeacherSchedule extends Component {
         super(props);
         this.state = {
             allDays: [],
-            allAvailableTime: []
+            allAvailableTime: [],
+            isOpenModalBooking: false,
+            dataScheduleTimeModal: {}
         }
     }
 
@@ -90,11 +93,26 @@ class TeacherSchedule extends Component {
         }
     }
 
+    handleClickScheduleTime = (time) => {
+        this.setState({
+            isOpenModalBooking: true,
+            dataScheduleTimeModal: time
+        })
+        console.log('check time: ', time);
+    }
+
+    closeBookingClose = () => {
+        this.setState({
+            isOpenModalBooking: false
+        })
+    }
+
     render() {
-        let { allDays, allAvailableTime } = this.state;
+        let { allDays, allAvailableTime, isOpenModalBooking, dataScheduleTimeModal } = this.state;
         let { language } = this.props;
 
         return (
+            <>
             <div className="teacher-schedule-container">
                 <div className="all-schedule">
                     <select onChange={(event) => this.handleOnChangeSelect(event)}>
@@ -125,7 +143,11 @@ class TeacherSchedule extends Component {
                                         let timeDisplay = language === LANGUAGES.VI ?
                                             item.timeTypeData.valueVi : item.timeTypeData.valueEn;
                                         return (
-                                            <button key={index}>{timeDisplay}</button>
+                                            <button key={index}
+                                                    className={language === LANGUAGES.VI ? 'btn-vie' : 'btn-en'}
+                                                    onClick={() => this.handleClickScheduleTime(item)}
+                                            >{timeDisplay}
+                                            </button>
                                         )
                                     })}
                                 </div>
@@ -145,6 +167,12 @@ class TeacherSchedule extends Component {
                     </div>
                 </div>
             </div>
+            <BookingModal 
+                isOpenModal={isOpenModalBooking}
+                closeBookingClose={this.closeBookingClose}
+                dataTime={dataScheduleTimeModal}
+                />
+            </>
         )
     }
 }
