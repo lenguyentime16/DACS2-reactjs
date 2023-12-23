@@ -56,6 +56,8 @@ class BookingModal extends Component {
                         <div className="teacher-infor">
                             <ProfileTeacher
                                 teacherId={teacherId}
+                                isShowDescriptionTeacher={false}
+                                dataTime={dataTime}
                             />
                         </div>
                         <div className="row">
