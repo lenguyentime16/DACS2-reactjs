@@ -5,6 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import {LANGUAGES} from '../../../utils'
 import NumberFormat from 'react-number-format'
 import { getExtraInforTeacherById } from '../../../services/userService';
+
 class TeacherExtraInfor extends Component {
     
     constructor(props) {
