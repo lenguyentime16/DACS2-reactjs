@@ -59,7 +59,8 @@
     },
     "homepage":{
         "outstanding-teacher": "Giảng viên nổi bật tuần qua",
-        "more-infor": "Xem Thêm"
+        "more-infor": "Xem Thêm",
+        "specialty-popular": "Các môn học phổ biến"
     },
     "manage-schedule":{
         "title": "Quản lý thời khóa biểu",

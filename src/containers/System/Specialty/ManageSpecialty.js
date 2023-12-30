@@ -64,6 +64,12 @@ class ManageSpecialty extends Component {
         let res = await createNewSpecialty(this.state);
         if (res && res.errCode === 0) {
             toast.success('Add new specialty succed!')
+            this.setState({
+                name: '',
+                imageBase64: '',
+                descriptionHTML: '',
+                descriptionMarkdown: '',
+            })
         } else {
             toast.error('Something wrongs....')
         }
@@ -73,17 +79,17 @@ class ManageSpecialty extends Component {
     render() {
         return (
             <div className="manage-specialty-container">
-                <div className="ms-title">Quản lý chuyên ngành</div>
+                <div className="ms-title">Quản lý môn học</div>
 
                 <div className="add-new-specialty row">
                     <div className="col-6 form-group">
-                        <label>Tên chuyên ngành</label>
+                        <label>Tên môn học</label>
                         <input className="form-control" type="text" value={this.state.name}
                             onChange={(event) => this.handleOnchangeInput(event, 'name')}
                         />
                     </div>
                     <div className="col-6 form-group">
-                        <label>Ảnh chuyên ngành</label>
+                        <label>Ảnh môn học</label>
                         <input className="form-control-file" type="file" 
                             onChange={(event) => this.handleOnChangeImage(event)}
                         />

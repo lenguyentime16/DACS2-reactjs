@@ -7,46 +7,55 @@ import Slider from 'react-slick';
 //Import css files
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
+import { getAllSpecialty } from '../../../services/userService';
 
 class Specialty extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            dataSpecialty: []
+        }
+    }
    
-
+    async componentDidMount() {
+        let res = await getAllSpecialty();
+        if (res && res.errCode === 0 ) {
+            this.setState({
+                dataSpecialty: res.data ? res.data : []
+            })
+        }
+    }
     render() {
-
+        let { dataSpecialty } = this.state
         return (
             <div className="section-share section-specialty">
                 <div className='section-container'>
                     <div className="section-header">
-                        <span className="title-section">Các môn học</span>
-                        <button className="btn-section">xem thêm</button>
+                        <span className="title-section">
+                            <FormattedMessage id='homepage.specialty-popular'/>
+                        </span>
+                        <button className="btn-section">
+                        <FormattedMessage id='homepage.more-infor'/>
+                        </button>
                     </div>
                     <div className="section-body">
                     <Slider {...this.props.settings}>
-                    <div className='section-customize'>
-                        <div className="bg-image section-specialty" />
-                        <h3>Toán</h3>
-                    </div>
-                    <div className='section-customize'>
-                    <div className="bg-image section-specialty" />
-                        <h3>Vật Lý</h3>
-                    </div>
-                    <div className='section-customize'>
-                    <div className="bg-image section-specialty" />
-                        <h3>Hoá Học</h3>
-                    </div>
-                    <div className='section-customize'>
-                    <div className="bg-image section-specialty" />
-                        <h3>Sinh Học</h3>
-                    </div>
-                    <div className='section-customize'>
-                    <div className="bg-image section-specialty" />
-                        <h3>Ngoại Ngữ</h3>
-                    </div>
-                    <div className='section-customize'>
-                    <div className="bg-image section-specialty" />
-                        <h3>Ngữ Văn</h3>
-                    </div>
+                     {dataSpecialty && dataSpecialty.length > 0 && 
+                        dataSpecialty.map((item,index) => {
+                            return (
+                              <div className="section-customize specialty-child" key={index} >
+                             <div 
+                                className="bg-image section-specialty"
+                                style={{ backgroundImage: `url(${item.image})`}}
+                                />
+                                <div className="specialty-name">{item.name}</div>
+                              </div>
+                            )
+                        })
+                     }   
+                    
                 </Slider>
                     </div>
                

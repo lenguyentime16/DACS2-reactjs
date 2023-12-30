@@ -60,7 +60,8 @@
     },
     "homepage":{
         "outstanding-teacher": "Outstanding lecturer of the week",
-        "more-infor": "More Infor"
+        "more-infor": "More Infor",
+        "specialty-popular": "Popular Subjects"
     },
     "manage-schedule":{
         "title": "Manage schedule",
