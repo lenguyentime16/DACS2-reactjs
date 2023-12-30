@@ -76,6 +76,10 @@ const getAllSpecialty = () => {
     return axios.get('/api/get-all-specialty')
 }
 
+const getAllDetailSpecialtyById = (data) => {
+    return axios.get(`/api/get-detail-specialty-by-id?id=${data.id}&location=${data.location}`)
+}
+
 export { handleLoginApi, getAllUsers,
         createNewUserService,deleteUserService,
         editUserService, getAllCodeService,
@@ -84,5 +88,5 @@ export { handleLoginApi, getAllUsers,
         saveBulkScheduleTeacher,getScheduleTeacherByDate,
         getExtraInforTeacherById,getProfileTeacherById,
         postStudentBookAppointment,postVerifyBookAppointment,
-        createNewSpecialty,getAllSpecialty} 
+        createNewSpecialty,getAllSpecialty,getAllDetailSpecialtyById} 
 
