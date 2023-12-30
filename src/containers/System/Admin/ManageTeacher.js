@@ -34,12 +34,21 @@ class ManageTeacher extends Component {
             listPrice: [],
             listPayment: [],
             listProvince: [],
+            listClassroom: [],
+            listSpecialty: [],
             selectedPrice: '',
             selectedPayment: '',
             selectedProvince: '',
+            selectedClassroom: '',
+            selectedSpecialty: '',
+
+
+
             nameClassRoom: '',
             addressClassRoom: '',
-            note: ''
+            note: '',
+            classroomId: '',
+            specialtyId: '',
 
         }
     }
@@ -84,6 +93,15 @@ class ManageTeacher extends Component {
                 })
             }
 
+            if (type === 'SPECIALTY') {
+                inputData.map((item, index) => {
+                    let object = {};
+                    object.label = item.name;
+                    object.value = item.id;
+                    result.push(object)
+                })
+            }
+
 
 
 
@@ -100,27 +118,31 @@ class ManageTeacher extends Component {
         }
 
         if (prevProps.allRequiredTeacherInfor !== this.props.allRequiredTeacherInfor) {
-            let { resPrice, resPayment, resProvince } = this.props.allRequiredTeacherInfor;
+            let { resPrice, resPayment, resProvince, resSpecialty } = this.props.allRequiredTeacherInfor;
             let dataSelectPrice = this.buildDataInputSelect(resPrice, 'PRICE');
             let dataSelectPayment = this.buildDataInputSelect(resPayment, 'PAYMENT');
             let dataSelectProvince = this.buildDataInputSelect(resProvince, 'PROVINCE');
+            let dataSelectSpecialty = this.buildDataInputSelect(resSpecialty, 'SPECIALTY');
             this.setState({
                 listPrice: dataSelectPrice,
                 listPayment: dataSelectPayment,
-                listProvince: dataSelectProvince
+                listProvince: dataSelectProvince,
+                listSpecialty: dataSelectSpecialty
             })
         }
         if (prevProps.language !== this.props.language) {
             let dataSelect = this.buildDataInputSelect(this.props.allTeachers, 'USERS')
-            let { resPrice, resPayment, resProvince } = this.props.allRequiredTeacherInfor;
+            let { resPrice, resPayment, resProvince, resSpecialty } = this.props.allRequiredTeacherInfor;
             let dataSelectPrice = this.buildDataInputSelect(resPrice, 'PRICE');
             let dataSelectPayment = this.buildDataInputSelect(resPayment, 'PAYMENT');
             let dataSelectProvince = this.buildDataInputSelect(resProvince, 'PROVINCE');
+            let dataSelectSpecialty = this.buildDataInputSelect(resSpecialty, 'PROVINCE');
             this.setState({
                 listTeachers: dataSelect,
                 listPrice: dataSelectPrice,
                 listPayment: dataSelectPayment,
-                listProvince: dataSelectProvince
+                listProvince: dataSelectProvince,
+                listSpecialty: dataSelectSpecialty
             })
         }
     }
@@ -146,7 +168,9 @@ class ManageTeacher extends Component {
             selectedProvince:this.state.selectedProvince.value,
             nameClassRoom: this.state.nameClassRoom,
             addressClassRoom: this.state.addressClassRoom,
-            note: this.state.note
+            note: this.state.note,
+            classroomId: this.state.selectedClassroom && this.state.selectedClassroom.value ? this.state.selectedClassroom.value : '',
+            specialtyId: this.state.selectedSpecialty.value
 
         })
         this.setState({
@@ -166,7 +190,7 @@ class ManageTeacher extends Component {
             let markdown = res.data.Markdown;
 
             let addressClassRoom ='', nameClassRoom='', note='',paymentId='',
-                priceId='',provinceId='',selectedPayment='',selectedPrice='',selectProvince='';
+                priceId='',provinceId='',selectedPayment='',selectedPrice='',selectedProvince='';
 
             if(res.data.Teacher_Infor) {
                 addressClassRoom = res.data.Teacher_Infor.addressClassRoom;
@@ -184,7 +208,7 @@ class ManageTeacher extends Component {
                     return item && item.value === priceId
                 })
 
-                selectProvince = listProvince.find(item => {
+                selectedProvince = listProvince.find(item => {
                     return item && item.value === provinceId
                 })
             }    
@@ -198,7 +222,7 @@ class ManageTeacher extends Component {
                 note:note,
                 selectedPayment:selectedPayment,
                 selectedPrice: selectedPrice,
-                selectProvince: selectProvince
+                selectedProvince: selectedProvince
             })
         } else {
             this.setState({
@@ -315,10 +339,33 @@ class ManageTeacher extends Component {
                     </div>
                 </div>
 
+                <div className="row">
+                    <div className="col-4 form-group">
+                        <label><FormattedMessage id="admin.manage-teacher.specialty"/></label>
+                        <Select 
+                        value = {this.state.selectedSpecialty}
+                        options = {this.state.listSpecialty}
+                        placeholder = {<FormattedMessage id='admin.manage-teacher.specialty' />}
+                        onChange = {this.handleChangeSelectTeacherInfor}
+                        name = "selectedSpecialty"
+                        />
+                    </div>
+                    <div className="col-4 form-group">
+                        <label><FormattedMessage id="admin.manage-teacher.select-classroom"/></label>
+                        <Select 
+                            value = {this.state.selectedClassroom}
+                            options = {this.state.listClassroom}
+                            placeholder = {<FormattedMessage id='admin.manage-teacher.select-classroom' />}
+                            onChange = {this.handleChangeSelectTeacherInfor}
+                            name = "selectedClassroom"
+                        />
+                    </div>
+                </div>
+
 
                 <div className='manage-teacher-editer'>
                     <MdEditor
-                        style={{ height: '500px' }}
+                        style={{ height: '300px' }}
                         renderHTML={text => mdParser.render(text)}
                         onChange={this.handleEditorChange}
                         value={this.state.contentMarkdown}

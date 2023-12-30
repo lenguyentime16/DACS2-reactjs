@@ -110,7 +110,9 @@
             "province": "Province",
             "class-name":"Class name",
             "class-address": "Classroom address",
-            "note": "Note"
+            "note": "Note",
+            "specialty":"Specialty",
+            "select-classroom": "Classroom"
         }
     }
     

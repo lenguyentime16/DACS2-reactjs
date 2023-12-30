@@ -109,7 +109,9 @@
             "province": "Tỉnh thành",
             "class-name":"Tên lớp học",
             "class-address": "Địa chỉ lớp học",
-            "note": "Ghi chú"
+            "note": "Ghi chú",
+            "specialty": "Chọn chuyên môn",
+            "select-classroom": "chọn phòng học"
         }
     }
     
