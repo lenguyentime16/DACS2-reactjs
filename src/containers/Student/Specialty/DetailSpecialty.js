@@ -3,6 +3,9 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import './DetailSpecialty.scss'
 import HomeHeader from '../../HomePage/HomeHeader';
+import TeacherSchedule from '../Teacher/TeacherSchedule'
+import TeacherExtraInfor from '../Teacher/TeacherExtraInfor'
+import ProfileTeacher from '../Teacher/ProfileTeacher';
 
 class DetailSpecialty extends Component {
     
@@ -10,7 +13,7 @@ class DetailSpecialty extends Component {
         super(props);
 
         this.state = {
-
+            arrTeacherId: [18,19,20]
         }
     }
 
@@ -27,11 +30,44 @@ class DetailSpecialty extends Component {
 
 
     render() {
+        let { arrTeacherId } = this.state
         return (
-            <>
+            <div className='detail-specialty-container'>
             <HomeHeader />
-            <div>hello world from detail specialty</div>
-            </>
+            <div className='detail-specialty-body'>
+                <div className='description-specialty'>
+
+                </div>
+                {arrTeacherId && arrTeacherId.length > 0 &&
+                    arrTeacherId.map((item, index) => {
+                        return (
+                            <div className="each-teacher" key={index}> 
+                                <div className="dt-content-left">
+                                    <div className='profile-teacher'>
+                                        <ProfileTeacher 
+                                        teacherId = {item}
+                                        isShowDescriptionTeacher = {true}
+                                        />
+                                        </div>
+                            </div>
+                            <div className="dt-content-right">
+                                <div className="teacher-schedule">
+                                    <TeacherSchedule 
+                                    teacherIdFromParent = {item}
+                                    />
+                                </div>
+                                <div className="teacher-extra-infor">
+                                    <TeacherExtraInfor 
+                                    teacherIdFromParent = {item}
+                                    />
+                                </div>
+                                </div>
+                                </div>
+                        )
+                    })
+                }
+            </div>
+            </div>
         )
     }
 }
