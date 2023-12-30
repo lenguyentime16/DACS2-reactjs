@@ -15,6 +15,7 @@ import HomePage from './HomePage/HomePage';
 import CustomScrollbars from '../components/CustomScrollbars';
 import DetailTeacher from './Student/Teacher/DetailTeacher';
 import Teacher from '../routes/Teacher';
+import VeriftEmail from './Student/VeriftEmail';
 
 
 class App extends Component {
@@ -51,6 +52,7 @@ class App extends Component {
                                 <Route path={'/teacher/'} component={userIsAuthenticated(Teacher)} />
                                 <Route path={path.HOMEPAGE} component={HomePage} />
                                 <Route path={path.DETAIL_TEACHER} component={DetailTeacher} />
+                                <Route path={path.VERIFY_EMAIL_BOOKING} component={VeriftEmail} />
                             </Switch>
                         </CustomScrollbars>
                         </div>

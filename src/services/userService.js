@@ -64,6 +64,10 @@ const postStudentBookAppointment = (data) => {
     return axios.post('/api/student-book-appointment', data)
 }
 
+const postVerifyBookAppointment = (data) => {
+    return axios.post('/api/verify-book-appointment', data)
+}
+
 export { handleLoginApi, getAllUsers,
         createNewUserService,deleteUserService,
         editUserService, getAllCodeService,
@@ -71,5 +75,5 @@ export { handleLoginApi, getAllUsers,
         saveDetailTeacherService,getDetailInforTeacher,
         saveBulkScheduleTeacher,getScheduleTeacherByDate,
         getExtraInforTeacherById,getProfileTeacherById,
-        postStudentBookAppointment} 
+        postStudentBookAppointment,postVerifyBookAppointment} 
 
