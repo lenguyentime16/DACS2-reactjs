@@ -7,6 +7,7 @@ import { LANGUAGES } from '../../../utils';
 import NumberFormat from 'react-number-format'
 import _ from 'lodash';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 
 class ProfileTeacher extends Component {
 
@@ -45,15 +46,15 @@ class ProfileTeacher extends Component {
     }
 
     renderTimeBooking = (dataTime) => {
-        let {language} = this.props;
+        let { language } = this.props;
         if (dataTime && !_.isEmpty(dataTime)) {
-            let time  = language=== LANGUAGES.VI ? 
-            dataTime.timeTypeData.valueVi: dataTime.timeTypeData.valueEn
+            let time = language === LANGUAGES.VI ?
+                dataTime.timeTypeData.valueVi : dataTime.timeTypeData.valueEn
 
-            let date = language=== LANGUAGES.VI ? 
-            moment.unix(+ dataTime.date /1000).format('dddd - DD/MM/YYYY')
-            :
-            moment.unix(+ dataTime.date /1000).locale('en').format('ddd - MM/DD/YYYY')
+            let date = language === LANGUAGES.VI ?
+                moment.unix(+ dataTime.date / 1000).format('dddd - DD/MM/YYYY')
+                :
+                moment.unix(+ dataTime.date / 1000).locale('en').format('ddd - MM/DD/YYYY')
             return (
                 <>
                     <div>{time} - {date}</div>
@@ -67,7 +68,10 @@ class ProfileTeacher extends Component {
 
     render() {
         let { dataProfile } = this.state;
-        let { language, isShowDescriptionTeacher, dataTime } = this.props;
+        let { language, isShowDescriptionTeacher,
+             dataTime, isShowPrice,
+              isShowLinkDetail, teacherId } 
+              = this.props;
         let nameVi = '', nameEn = '';
 
         if (dataProfile && dataProfile.positionData) {
@@ -107,27 +111,36 @@ class ProfileTeacher extends Component {
                         </div>
                     </div>
                 </div>
-                <div className='price'>
-                    <FormattedMessage id="student.booking-modal.price" />
-                    {dataProfile && dataProfile.Teacher_Infor && language === LANGUAGES.VI &&
-                        < NumberFormat
-                            className="currency"
-                            value={dataProfile.Teacher_Infor.priceTypeData.valueVi}
-                            displayType={'text'}
-                            thousandSeparator={true}
-                            suffix={'VND'}
-                        />
-                    }
-                    {dataProfile && dataProfile.Teacher_Infor && language === LANGUAGES.EN &&
-                        <NumberFormat
-                            className="currency"
-                            value={dataProfile.Teacher_Infor.priceTypeData.valueEn}
-                            displayType={'text'}
-                            thousandSeparator={true}
-                            suffix={'$'}
-                        />
-                    }
-                </div>
+
+                {isShowLinkDetail === true &&
+                    <div className='view-detail-teacher'>
+                        <Link to={`/detail-teacher/${teacherId}`}>Xem Thêm</Link>
+                    </div>
+                }
+                {!isShowPrice === true &&
+                    <div className='price'>
+                        <FormattedMessage id="student.booking-modal.price" />
+                        {dataProfile && dataProfile.Teacher_Infor && language === LANGUAGES.VI &&
+                            < NumberFormat
+                                className="currency"
+                                value={dataProfile.Teacher_Infor.priceTypeData.valueVi}
+                                displayType={'text'}
+                                thousandSeparator={true}
+                                suffix={'VND'}
+                            />
+                        }
+                        {dataProfile && dataProfile.Teacher_Infor && language === LANGUAGES.EN &&
+                            <NumberFormat
+                                className="currency"
+                                value={dataProfile.Teacher_Infor.priceTypeData.valueEn}
+                                displayType={'text'}
+                                thousandSeparator={true}
+                                suffix={'$'}
+                            />
+                        }
+                    </div>
+                }
+
             </div>
         )
     }

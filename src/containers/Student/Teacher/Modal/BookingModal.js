@@ -10,7 +10,7 @@ import * as actions from '../../../../store/actions'
 import { LANGUAGES } from '../../../../utils';
 import Select from 'react-select';
 import { postStudentBookAppointment } from '../../../../services/userService';
-import {toast} from "react-toastify"
+import { toast } from "react-toastify"
 import moment from 'moment'
 
 
@@ -41,7 +41,7 @@ class BookingModal extends Component {
     buildDataGender = (data) => {
         let result = [];
         let language = this.props.language;
-        if(data && data.length > 0) {
+        if (data && data.length > 0) {
             data.map(item => {
                 let object = {};
                 object.label = language === LANGUAGES.VI ? item.valueVi : item.valueEn;
@@ -72,12 +72,12 @@ class BookingModal extends Component {
                     timeType: timeType
                 })
             }
-        } 
+        }
     }
 
     handleOnchangeInput = (event, id) => {
         let valueInput = event.target.value;
-        let stateCopy = {...this.state};
+        let stateCopy = { ...this.state };
         stateCopy[id] = valueInput;
         this.setState({
             ...stateCopy
@@ -95,33 +95,33 @@ class BookingModal extends Component {
     }
 
     buildTimeBooking = (dataTime) => {
-        let {language} = this.props;
+        let { language } = this.props;
         if (dataTime && !_.isEmpty(dataTime)) {
             let time = language === LANGUAGES.VI ?
                 dataTime.timeTypeData.valueVi : dataTime.timeTypeData.valueEn;
 
-                let date = language === LANGUAGES.VI ?
+            let date = language === LANGUAGES.VI ?
                 moment.unix(+dataTime.date / 1000).format('dddd - DD/MM/YYYY')
                 :
                 moment.unix(+dataTime.date / 1000).locale('en').format('ddd - DD/MM/YYYY')
 
-                return `${time} - ${date}`
+            return `${time} - ${date}`
         }
 
         return ''
     }
 
     buildTeacherName = (dataTime) => {
-        let {language} = this.props;
+        let { language } = this.props;
         if (dataTime && !_.isEmpty(dataTime)) {
             let name = language === LANGUAGES.VI ?
-            `${dataTime.teacherData.lastName} ${dataTime.teacherData.firstName}`
-            :
-            `${dataTime.teacherData.firstName} ${dataTime.teacherData.lastName}`
+                `${dataTime.teacherData.lastName} ${dataTime.teacherData.firstName}`
+                :
+                `${dataTime.teacherData.firstName} ${dataTime.teacherData.lastName}`
 
             return name
         }
-        
+
         return ''
     }
 
@@ -173,7 +173,7 @@ class BookingModal extends Component {
                 <div className="booking-modal-content">
                     <div className="booking-modal-header">
                         <span className="left">
-                            <FormattedMessage id="student.booking-modal.title"/>
+                            <FormattedMessage id="student.booking-modal.title" />
                         </span>
                         <span
                             className="right"
@@ -191,68 +191,68 @@ class BookingModal extends Component {
                         <div className="row">
                             <div className="col-6 form-group">
                                 <label>
-                                    <FormattedMessage id="student.booking-modal.fullName"/>
+                                    <FormattedMessage id="student.booking-modal.fullName" />
                                 </label>
-                                <input className="form-control" 
+                                <input className="form-control"
                                     value={this.state.fullName}
                                     onChange={(event) => this.handleOnchangeInput(event, 'fullName')}
                                 />
                             </div>
                             <div className="col-6 form-group">
                                 <label>
-                                <FormattedMessage id="student.booking-modal.phoneNumber"/>
+                                    <FormattedMessage id="student.booking-modal.phoneNumber" />
                                 </label>
-                                <input className="form-control" 
-                                       value={this.state.phoneNumber}
-                                       onChange={(event) => this.handleOnchangeInput(event, 'phoneNumber')}
+                                <input className="form-control"
+                                    value={this.state.phoneNumber}
+                                    onChange={(event) => this.handleOnchangeInput(event, 'phoneNumber')}
                                 />
                             </div>
                             <div className="col-6 form-group">
                                 <label>
-                                    <FormattedMessage id="student.booking-modal.email"/>
-                                    </label>
-                                <input className="form-control" 
-                                   value={this.state.email}
-                                   onChange={(event) => this.handleOnchangeInput(event, 'email')}
+                                    <FormattedMessage id="student.booking-modal.email" />
+                                </label>
+                                <input className="form-control"
+                                    value={this.state.email}
+                                    onChange={(event) => this.handleOnchangeInput(event, 'email')}
                                 />
                             </div>
                             <div className="col-6 form-group">
                                 <label>
-                                <FormattedMessage id="student.booking-modal.address"/>
+                                    <FormattedMessage id="student.booking-modal.address" />
                                 </label>
-                                <input className="form-control" 
-                                 value={this.state.address}
-                                   onChange={(event) => this.handleOnchangeInput(event, 'address')}
+                                <input className="form-control"
+                                    value={this.state.address}
+                                    onChange={(event) => this.handleOnchangeInput(event, 'address')}
                                 />
                             </div>
                             <div className="col-12 form-group">
-                                <label> 
-                                    <FormattedMessage id="student.booking-modal.academicLevel"/> 
-                                    </label>
-                                <input className="form-control" 
-                                value={this.state.reason}
-                                onChange={(event) => this.handleOnchangeInput(event, 'reason')}
+                                <label>
+                                    <FormattedMessage id="student.booking-modal.academicLevel" />
+                                </label>
+                                <input className="form-control"
+                                    value={this.state.reason}
+                                    onChange={(event) => this.handleOnchangeInput(event, 'reason')}
                                 />
                             </div>
                             <div className="col-6 form-group">
-                                <label> <FormattedMessage id="student.booking-modal.birthday"/> </label>
-                                <DatePicker 
-                                value={this.state.birthday}
-                                className= "form-control"
-                                onChange={this.handleOnchangeDatePicker}
+                                <label> <FormattedMessage id="student.booking-modal.birthday" /> </label>
+                                <DatePicker
+                                    value={this.state.birthday}
+                                    className="form-control"
+                                    onChange={this.handleOnchangeDatePicker}
                                 />
-                                 
-                                
+
+
                             </div>
                             <div className="col-6 form-group">
                                 <label>
-                                <FormattedMessage id="student.booking-modal.gender"/>
+                                    <FormattedMessage id="student.booking-modal.gender" />
                                 </label>
                                 <Select
-                                  value={this.state.selectedGender}
-                                  onChange={this.handleChangeSelect}
-                                  options = {this.state.genders}
-                                  />
+                                    value={this.state.selectedGender}
+                                    onChange={this.handleChangeSelect}
+                                    options={this.state.genders}
+                                />
                             </div>
                         </div>
                     </div>
@@ -260,12 +260,12 @@ class BookingModal extends Component {
                         <button className="btn-booking-confirm"
                             onClick={() => this.handleConfirmBooking()}
                         >
-                             <FormattedMessage id="student.booking-modal.btnConfirm"/>
+                            <FormattedMessage id="student.booking-modal.btnConfirm" />
                         </button>
                         <button className="btn-booking-cancel"
                             onClick={closeBookingClose}
                         >
-                             <FormattedMessage id="student.booking-modal.btnCancel"/>
+                            <FormattedMessage id="student.booking-modal.btnCancel" />
                         </button>
                     </div>
                 </div>

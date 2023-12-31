@@ -23,6 +23,14 @@ class TeacherSchedule extends Component {
     async componentDidMount() {
         let { language } = this.props;
         let allDays = this.getArrDays(language);
+
+        if (this.props.teacherIdFromParent) {
+            let res = await getScheduleTeacherByDate(this.props.teacherIdFromParent, allDays[0].value);
+            this.setState({
+                allAvailableTime: res.data ? res.data : []
+            })
+        }
+
         this.setState({
             allDays: allDays,
         })
@@ -113,64 +121,64 @@ class TeacherSchedule extends Component {
 
         return (
             <>
-            <div className="teacher-schedule-container">
-                <div className="all-schedule">
-                    <select onChange={(event) => this.handleOnChangeSelect(event)}>
-                        {allDays && allDays.length > 0 &&
-                            allDays.map((item, index) => {
-                                return (
-                                    <option
-                                        value={item.value}
-                                        key={index}
-                                    >
-                                        {item.label}
-                                    </option>
-                                )
-                            })}
-                    </select>
-                </div>
-                <div className="all-available-time">
-                    <div className='text-calendar'>
-                        <i className='fas fa-calendar-alt'>
-                            <span><FormattedMessage id='student.detail-teacher.schedule' /></span>
-                        </i>
+                <div className="teacher-schedule-container">
+                    <div className="all-schedule">
+                        <select onChange={(event) => this.handleOnChangeSelect(event)}>
+                            {allDays && allDays.length > 0 &&
+                                allDays.map((item, index) => {
+                                    return (
+                                        <option
+                                            value={item.value}
+                                            key={index}
+                                        >
+                                            {item.label}
+                                        </option>
+                                    )
+                                })}
+                        </select>
                     </div>
-                    <div className='time-content'>
-                        {allAvailableTime && allAvailableTime.length > 0 ?
-                            <React.Fragment>
-                                <div className='time-content-btns'>
-                                    {allAvailableTime.map((item, index) => {
-                                        let timeDisplay = language === LANGUAGES.VI ?
-                                            item.timeTypeData.valueVi : item.timeTypeData.valueEn;
-                                        return (
-                                            <button key={index}
+                    <div className="all-available-time">
+                        <div className='text-calendar'>
+                            <i className='fas fa-calendar-alt'>
+                                <span><FormattedMessage id='student.detail-teacher.schedule' /></span>
+                            </i>
+                        </div>
+                        <div className='time-content'>
+                            {allAvailableTime && allAvailableTime.length > 0 ?
+                                <React.Fragment>
+                                    <div className='time-content-btns'>
+                                        {allAvailableTime.map((item, index) => {
+                                            let timeDisplay = language === LANGUAGES.VI ?
+                                                item.timeTypeData.valueVi : item.timeTypeData.valueEn;
+                                            return (
+                                                <button key={index}
                                                     className={language === LANGUAGES.VI ? 'btn-vie' : 'btn-en'}
                                                     onClick={() => this.handleClickScheduleTime(item)}
-                                            >{timeDisplay}
-                                            </button>
-                                        )
-                                    })}
-                                </div>
+                                                >{timeDisplay}
+                                                </button>
+                                            )
+                                        })}
+                                    </div>
 
 
-                                <div className='book-free'>
-                                    <span><FormattedMessage id='student.detail-teacher.choose' />
-                                        <i className='far fa-hand-point-up'></i>
-                                        <FormattedMessage id='student.detail-teacher.book-free' />
-                                    </span>
-                                </div>
+                                    <div className='book-free'>
+                                        <span><FormattedMessage id='student.detail-teacher.choose' />
+                                            <i className='far fa-hand-point-up'></i>
+                                            <FormattedMessage id='student.detail-teacher.book-free' />
+                                        </span>
+                                    </div>
 
-                            </React.Fragment>
-                            :
-                            <div className='no-schedule'><FormattedMessage id='student.detail-teacher.no-schedule' /></div>
-                        }
+                                </React.Fragment>
+                                :
+                                <div className='no-schedule'><FormattedMessage id='student.detail-teacher.no-schedule' /></div>
+                            }
+                        </div>
                     </div>
                 </div>
-            </div>
-            <BookingModal 
-                isOpenModal={isOpenModalBooking}
-                closeBookingClose={this.closeBookingClose}
-                dataTime={dataScheduleTimeModal}
+                <BookingModal
+                    isOpenModal={isOpenModalBooking}
+                    closeBookingClose={this.closeBookingClose}
+                    dataTime={dataScheduleTimeModal}
                 />
             </>
         )
