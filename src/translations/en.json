@@ -39,7 +39,8 @@
 
         },
         "teacher":{
-            "manage-schedule":  "Manage Teacher's schedule"
+            "manage-schedule":  "Manage Teacher's schedule",
+            "manage-student": "Manage Teacher's student"
         }
     },
     "manage-user": {

@@ -58,6 +58,10 @@ export const teacherMenu = [
             {
                 //quản lý Thời khóa biểu
                 name: 'menu.teacher.manage-schedule', link: '/teacher/manage-schedule'
+            },
+            {
+                // quan ly hoc sinh cua giao vien
+                name: 'menu.teacher.manage-student', link: '/teacher/manage-student'
             }
         ]
     }

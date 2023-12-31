@@ -38,7 +38,8 @@
             "manage-handbook":"quản lý cẩm nang"
         },
         "teacher":{
-            "manage-schedule":  "Quản lí thời khóa biểu"
+            "manage-schedule":  "Quản lí thời khóa biểu",
+            "manage-student": "Quản lí học sinh"
         }
     },
     "manage-user": {
