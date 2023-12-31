@@ -101,10 +101,14 @@ class ManageTeacher extends Component {
                     result.push(object)
                 })
             }
-
-
-
-
+            if (type === 'CLASSROOM') {
+                inputData.map((item, index) => {
+                    let object = {};
+                    object.label = item.name;
+                    object.value = item.id;
+                    result.push(object)
+                })
+            }
         }
         return result
     }
@@ -118,16 +122,18 @@ class ManageTeacher extends Component {
         }
 
         if (prevProps.allRequiredTeacherInfor !== this.props.allRequiredTeacherInfor) {
-            let { resPrice, resPayment, resProvince, resSpecialty } = this.props.allRequiredTeacherInfor;
+            let { resPrice, resPayment, resProvince, resSpecialty, resClassroom } = this.props.allRequiredTeacherInfor;
             let dataSelectPrice = this.buildDataInputSelect(resPrice, 'PRICE');
             let dataSelectPayment = this.buildDataInputSelect(resPayment, 'PAYMENT');
             let dataSelectProvince = this.buildDataInputSelect(resProvince, 'PROVINCE');
             let dataSelectSpecialty = this.buildDataInputSelect(resSpecialty, 'SPECIALTY');
+            let dataSelectClassroom = this.buildDataInputSelect(resClassroom, 'CLASSROOM')
             this.setState({
                 listPrice: dataSelectPrice,
                 listPayment: dataSelectPayment,
                 listProvince: dataSelectProvince,
-                listSpecialty: dataSelectSpecialty
+                listSpecialty: dataSelectSpecialty,
+                listClassroom: dataSelectClassroom
             })
         }
         if (prevProps.language !== this.props.language) {
@@ -183,17 +189,19 @@ class ManageTeacher extends Component {
 
     handleChangeSelect = async (selectedOption) => {
         this.setState({ selectedOption });
-        let {listPayment, listPrice, listProvince, listSpecialty } = this.state;
+        let {listPayment, listPrice, listProvince, listSpecialty, listClassroom } = this.state;
 
         let res = await getDetailInforTeacher(selectedOption.value);
         if (res && res.errCode === 0 && res.data && res.data.Markdown) {
             let markdown = res.data.Markdown;
 
-            let addressClassRoom ='', nameClassRoom='', note='',paymentId='',
-                priceId='',provinceId='',specialtyId='',selectedPayment='',selectedPrice='',selectedProvince='',
-                selectedSpecialty='';
+            let addressClassRoom ='', nameClassRoom='', note='',paymentId='',description='',
+                priceId='',provinceId='',specialtyId='',classroomId='',
+                selectedPayment='',selectedPrice='',selectedProvince='',
+                selectedSpecialty='', selectedClassroom='';
 
             if(res.data.Teacher_Infor) {
+                description = res.data.Teacher_Infor.description;
                 addressClassRoom = res.data.Teacher_Infor.addressClassRoom;
                 nameClassRoom = res.data.Teacher_Infor.nameClassRoom;
                 note = res.data.Teacher_Infor.note;
@@ -201,6 +209,7 @@ class ManageTeacher extends Component {
                 priceId = res.data.Teacher_Infor.priceId;
                 provinceId = res.data.Teacher_Infor.provinceId;
                 specialtyId= res.data.Teacher_Infor.specialtyId;
+                classroomId= res.data.Teacher_Infor.classroomId;
 
                 selectedPayment = listPayment.find(item=> {
                     return item && item.value === paymentId
@@ -217,6 +226,9 @@ class ManageTeacher extends Component {
                 selectedSpecialty = listSpecialty.find(item => {
                     return item && item.value === specialtyId
                 })
+                selectedClassroom = listClassroom.find(item => {
+                    return item && item.value === classroomId
+                })
             }    
             this.setState({
                 contentHTML: markdown.contentHTML,
@@ -229,7 +241,8 @@ class ManageTeacher extends Component {
                 selectedPayment:selectedPayment,
                 selectedPrice: selectedPrice,
                 selectedProvince: selectedProvince,
-                selectedSpecialty:selectedSpecialty
+                selectedSpecialty:selectedSpecialty,
+                selectedClassroom: selectedClassroom
             })
         } else {
             this.setState({
@@ -243,7 +256,8 @@ class ManageTeacher extends Component {
                 selectedPayment: '',
                 selectedPrice: '',
                 selectedProvince: '',
-                selectedSpecialty: ''
+                selectedSpecialty: '',
+                selectedClassroom:'',
             })
         }
         console.log(`Option selected :`, res);

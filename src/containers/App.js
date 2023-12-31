@@ -17,6 +17,7 @@ import DetailTeacher from './Student/Teacher/DetailTeacher';
 import Teacher from '../routes/Teacher';
 import VeriftEmail from './Student/VeriftEmail';
 import DetailSpecialty from './Student/Specialty/DetailSpecialty';
+import DetailClassroom from './Student/Classroom/DetailClassroom';
 
 
 class App extends Component {
@@ -54,6 +55,7 @@ class App extends Component {
                                 <Route path={path.HOMEPAGE} component={HomePage} />
                                 <Route path={path.DETAIL_TEACHER} component={DetailTeacher} />
                                 <Route path={path.DETAIL_SPECIALTY} component={DetailSpecialty} />
+                                <Route path={path.DETAIL_CLASSROOM} component={DetailClassroom} />
                                 <Route path={path.VERIFY_EMAIL_BOOKING} component={VeriftEmail} />
                             </Switch>
                         </CustomScrollbars>

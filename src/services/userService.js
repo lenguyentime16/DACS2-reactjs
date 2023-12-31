@@ -84,6 +84,14 @@ const createNewClassroom = (data) => {
     return axios.post('/api/create-new-classroom', data)
 }
 
+const getAllClassroom = () => {
+    return axios.get('/api/get-all-classroom')
+}
+
+const getAllDetailClassroomById = (data) => {
+    return axios.get(`/api/get-detail-classroom-by-id?id=${data.id}`)
+}
+
 export { handleLoginApi, getAllUsers,
         createNewUserService,deleteUserService,
         editUserService, getAllCodeService,
@@ -93,6 +101,6 @@ export { handleLoginApi, getAllUsers,
         getExtraInforTeacherById,getProfileTeacherById,
         postStudentBookAppointment,postVerifyBookAppointment,
         createNewSpecialty,getAllSpecialty,getAllDetailSpecialtyById,
-        createNewClassroom,
+        createNewClassroom,getAllClassroom,getAllDetailClassroomById
     } 
 
