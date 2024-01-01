@@ -96,6 +96,10 @@ const getAllStudentForTeacher = (data) => {
     return axios.get(`/api/get-list-student-for-teacher?teacherId=${data.teacherId}&date=${data.date}`)
 }
 
+const postSendDocument = (data) => {
+    return axios.post('/api/send-document', data)
+}
+
 export { handleLoginApi, getAllUsers,
         createNewUserService,deleteUserService,
         editUserService, getAllCodeService,
@@ -106,6 +110,6 @@ export { handleLoginApi, getAllUsers,
         postStudentBookAppointment,postVerifyBookAppointment,
         createNewSpecialty,getAllSpecialty,getAllDetailSpecialtyById,
         createNewClassroom,getAllClassroom,getAllDetailClassroomById,
-        getAllStudentForTeacher
+        getAllStudentForTeacher, postSendDocument
     } 
 
