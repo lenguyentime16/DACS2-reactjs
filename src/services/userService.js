@@ -92,6 +92,10 @@ const getAllDetailClassroomById = (data) => {
     return axios.get(`/api/get-detail-classroom-by-id?id=${data.id}`)
 }
 
+const getAllStudentForTeacher = (data) => {
+    return axios.get(`/api/get-list-student-for-teacher?teacherId=${data.teacherId}&date=${data.date}`)
+}
+
 export { handleLoginApi, getAllUsers,
         createNewUserService,deleteUserService,
         editUserService, getAllCodeService,
@@ -101,6 +105,7 @@ export { handleLoginApi, getAllUsers,
         getExtraInforTeacherById,getProfileTeacherById,
         postStudentBookAppointment,postVerifyBookAppointment,
         createNewSpecialty,getAllSpecialty,getAllDetailSpecialtyById,
-        createNewClassroom,getAllClassroom,getAllDetailClassroomById
+        createNewClassroom,getAllClassroom,getAllDetailClassroomById,
+        getAllStudentForTeacher
     } 
 

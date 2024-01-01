@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { FormattedMessage } from 'react-intl';
 import './ManageStudent.scss';
 import DatePicker from '../../../components/Input/DatePicker';
+import { getAllStudentForTeacher } from '../../../services/userService';
+import moment from 'moment';
 
 
 class ManageStudent extends Component {
@@ -10,12 +12,30 @@ class ManageStudent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentDate: new Date(),
+            currentDate: moment(new Date()).startOf('day').valueOf(),
+            dataStudent: []
         }
     }
 
     async componentDidMount() {
+        let { user } = this.props;
+        let { currentDate } = this.state;
+        let formatedDate = new Date(currentDate).getTime();
+        this.getDataStudent(user, formatedDate);
+    }
 
+    getDataStudent = async (user, formatedDate) => {
+        let res = await getAllStudentForTeacher({
+            teacherId: user.id,
+            date: formatedDate
+        })
+        console.log('user', user);
+        console.log("res: ", res);
+        if (res && res.errCode === 0) {
+            this.setState({
+                dataStudent: res.data
+            })
+        }
     }
 
     async componentDidUpdate(prevProps, prevState, snapshot) {
@@ -27,10 +47,25 @@ class ManageStudent extends Component {
     handleOnchangeDatePicker = (date) => {
         this.setState({
             currentDate: date[0]
+        }, () => {
+            let { user } = this.props;
+            let { currentDate } = this.state;
+            let formatedDate = new Date(currentDate).getTime();
+            this.getDataStudent(user, formatedDate)
         })
     }
 
+    handleBtnConfirm = () => {
+
+    }
+
+    handleBtnRemedy = () => {
+        
+    }
+
     render () {
+        let { dataStudent } = this.state;
+        console.log('check state:', dataStudent)
         return (
             <div className="manage-student-container">
                 <div className="m-p-title">
@@ -47,15 +82,40 @@ class ManageStudent extends Component {
                     </div>
                     <div className="col-12 table-manage-student">
                         <table style = {{ width: '100%' }}>
+                            <tbody>
                             <tr>
-                                <th>Name</th>
-                                <th colSpan="2">Telephone</th>
+                                <th>STT</th>
+                                <th>Thời gian</th>
+                                <th>Họ và tên</th>
+                                <th>Địa chỉ</th>
+                                <th>Giới tính</th>
+                                <th>Actions</th>
                             </tr>
-                            <tr>
-                                <td>Thanh Binh</td>
-                                <td>43985734</td>
-                                <td>43985734</td>
-                            </tr>
+                            {dataStudent && dataStudent.length > 0 ? 
+                                dataStudent.map((item, index) => {
+                                    return (
+                                        <tr key={index}>
+                                            <td>{index+1}</td>
+                                            <td>{item.timeTypeDataStudent.valueVi}</td>
+                                            <td>{item.studentData.firstName}</td>
+                                            <td>{item.studentData.address}</td>
+                                            <td>{item.studentData.genderData.valueVi}</td>
+                                            <td>
+                                                <button className="mp-btn-confirm"
+                                                    onClick={() => this.handleBtnConfirm()}>Xác nhận</button>
+                                                    <button className="mp-btn-remedy"
+                                                    onClick={() => this.handleBtnRemedy()}>Gửi hoá đơn</button>
+                                            </td>
+                                        </tr>
+                                    )
+                                })
+
+                                :
+                                <tr>
+                                  <td>no data</td>  
+                                </tr>
+                            }
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -67,6 +127,7 @@ class ManageStudent extends Component {
 const mapStateToProps = state => {
     return {
         language: state.app.language,
+        user: state.user.userInfo,
     }
 }
 
