@@ -62,7 +62,8 @@
     "homepage":{
         "outstanding-teacher": "Outstanding lecturer of the week",
         "more-infor": "More Infor",
-        "specialty-popular": "Popular Subjects"
+        "specialty-popular": "Popular Subjects",
+        "popular-centers": "Popular centers"
     },
     "manage-schedule":{
         "title": "Manage schedule",

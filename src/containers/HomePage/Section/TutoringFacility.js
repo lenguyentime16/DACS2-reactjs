@@ -40,8 +40,8 @@ class TutoringFacility extends Component {
             <div className='section-share section-tutoring-facility'>
                 <div className='section-container'>
                     <div className="section-header">
-                        <span className="title-section">Các môn học</span>
-                        <button className="btn-section">xem thêm</button>
+                        <span className="title-section"><FormattedMessage id="homepage.popular-centers" /></span>
+                        <button className="btn-section"><FormattedMessage id="homepage.more-infor" /></button>
                     </div>
                     <div className="section-body">
                         <Slider {...this.props.settings}>
